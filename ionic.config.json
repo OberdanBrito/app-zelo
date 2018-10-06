@@ -1,0 +1,8 @@
+{
+  "name": "euZelo",
+  "app_id": "b01810cf",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
