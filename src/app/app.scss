@@ -14,3 +14,28 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+/*
+.content {
+    background-color: color($colors, primary);
+    color: white;
+  }
+.item {
+    background-color: color($colors, primary);
+    color: white;
+  }
+  */
+  .toolbar-background {
+    background-color: color($colors, primary);
+    color: white;
+    height: 75px;
+  }
+.toolbar-title {
+    color: white;
+  }
+.bar-button {
+    color: white;
+  }
+.prob-item {
+    background-color: #e8e8e8;
+    margin: 10px;
+}

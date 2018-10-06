@@ -1,0 +1,56 @@
+<!--
+  Generated template for the CriarProblemaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Criar Problema</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Local</ion-label>
+      <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="problema.local_id" (ionChange)="getTipos(problema.local_id)">
+        <ion-option *ngFor="let item of listaLocais" value="{{item.id}}">{{item.local}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Tipo do problema</ion-label>
+        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="problema.tipo_id">
+          <ion-option *ngFor="let item of listaTipos" value="{{item.id}}">{{item.tipo}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>  
+  <ion-item>
+    <ion-input type="text" placeholder="Título do problema" required="required" [(ngModel)]="problema.titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-input type="tel" placeholder="Fone de contato" required="required" [(ngModel)]="problema.fone"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-textarea type="text" placeholder="Descreva o problema" required="required" [(ngModel)]="problema.descricao"></ion-textarea>
+  </ion-item>
+  <div *ngFor = "let fotinho of fotos">
+      <!--img src="http://192.168.0.7:8000/storage/{{fotinho.foto}}" style="width:25%;height:auto; float: left; border: 1px solid transparent" #myImage (click)="presentImage(myImage)"/-->
+      <img src="{{fotinho}}" style="width:25%;height:auto; float: left; border: 1px solid transparent" (click)="showImage(fotinho)"/>
+  </div>
+  <button ion-button full (click)="onActionSheet()">Adicione uma imagem ...</button>
+
+  <p>
+    <button id="salvar" ion-button full (click)="addProblema()">
+      Salvar
+    </button>
+    <button id="limpar" ion-button full (click)="clsProblema()">
+      Limpar
+    </button>  
+  </p>
+  
+</ion-content>

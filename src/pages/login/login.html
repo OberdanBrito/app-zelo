@@ -1,0 +1,17 @@
+<ion-content id="page1" style="background-color:#ff8a1c;">
+  <p>
+    <img src="assets/imgs/logoZelo.png" style="display:block;width:70%;height:30;margin-left:auto;margin-right:auto;" />
+  </p>
+  <ion-item id="login-input2">
+    <ion-input type="email" placeholder="E-mail"  [(ngModel)]="usuario.email"></ion-input>
+  </ion-item>
+  <ion-item id="login-input3">
+    <ion-input type="password" placeholder="Senha"  [(ngModel)]="usuario.password"></ion-input>
+  </ion-item>
+  <button id="login-button3" ion-button color="dark" full on-click="loginUsuario()">
+    Login
+  </button>
+  <button id="login-button6" (click)="goCadastro()" ion-button clear color="dark" full href-inappbrowser="/signup">
+    Ou crie sua conta
+  </button>
+</ion-content>

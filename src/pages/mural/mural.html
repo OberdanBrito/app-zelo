@@ -1,0 +1,30 @@
+<!--
+  Generated template for the MuralPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mural de Problemas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-fab right bottom>
+      <button ion-fab mini (click)="goToCriarProblema()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>  
+  <ion-list>
+    <ion-item class="prob-item" (click)="goToDetalheProblema(item)" *ngFor="let item of problemas">
+      <h2>{{item.titulo}}</h2>
+      <p>{{item.data | date:'dd/MM/yyyy'}}</p>
+      <ion-icon name="ios-arrow-dropright" item-end></ion-icon>      
+    </ion-item>
+  </ion-list>
+</ion-content>

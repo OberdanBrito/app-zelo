@@ -1,0 +1,58 @@
+<!--
+  Generated template for the CadastroPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dados Pessoais</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <img [hidden]="usuario.foto" src="assets/imgs/fotoPerfil.png" style="display:block"/>
+            <img [hidden]="!usuario.foto" src="{{usuario.foto}}"/>
+            <button ion-button full (click)="onActionSheet()">Adicione uma imagem ...</button>
+            <ion-item>
+              <ion-input type="text" placeholder="Nome" required [(ngModel)]="usuario.name"></ion-input>
+            </ion-item>
+            <span class="alert" *ngIf="msgName">*Nome é obrigatório</span>
+            <ion-list>
+                <ion-item>
+                  <ion-label>Sexo</ion-label>
+                  <ion-select [(ngModel)]="usuario.sexo">
+                    <ion-option value="masculino">Masculino</ion-option>
+                    <ion-option value="feminino">Feminino</ion-option>
+                  </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-item>
+              <ion-label stacked>Data de Nascimento</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="usuario.nascimento"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-input type="email" placeholder="E-mail" [(ngModel)]="usuario.email"></ion-input>
+            </ion-item>
+            <span class="alert" *ngIf="msgEmail">*Email é obrigatório</span>
+            <ion-item>
+              <ion-input type="password" placeholder="Senha" [(ngModel)]="usuario.password"></ion-input>
+            </ion-item>
+            <span class="alert" *ngIf="msgPassword">*Senha é obrigatório</span>
+            <ion-item>
+              <ion-input type="password" placeholder="Confirme a Senha" [(ngModel)]="usuario.password_confirmation"></ion-input>
+            </ion-item>
+            <span class="alert" *ngIf="msgPassConf">*Confirmação da senha é obrigatório</span>
+        </ion-card-content>
+    </ion-card>
+    <p>
+      <button ion-button full on-click="goSelectCondominio()">
+        Próximo >
+      </button>
+    </p>
+</ion-content>
