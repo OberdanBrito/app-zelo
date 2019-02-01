@@ -14,7 +14,6 @@
 
 
 <ion-content padding>
-  <p>Se o seu condomínio não estiver disponível, siga com a criação do usuário, e depois, crie o condomínio no Zelo</p>
   <ion-card>
     <ion-list>
       <ion-item>
@@ -25,14 +24,17 @@
       </ion-item>
       <ion-item>
           <ion-label>Torre</ion-label>
-          <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="usuario.torre_id">
+          <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="usuario.torre_id" (ionChange)="lstUnidades(usuario.condominio_id, usuario.torre_id)">
             <ion-option *ngFor="let item of listaTorres" value="{{item.id}}">{{item.nome}}</ion-option>
           </ion-select>
       </ion-item>
+      <ion-item>
+          <ion-label>Unidade</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="usuario.unidade">
+            <ion-option *ngFor="let item of listaUnidades" value="{{item.id}}">{{item.unidade}}</ion-option>
+          </ion-select>
+      </ion-item>
     </ion-list>  
-    <ion-item>
-        <ion-input type="text" placeholder="Unidade" [(ngModel)]="usuario.unidade"></ion-input>
-    </ion-item>    
     <ion-item>
         <ion-input type="text" placeholder="Validador" [(ngModel)]="usuario.validador"></ion-input>
     </ion-item>    

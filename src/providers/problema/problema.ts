@@ -1,3 +1,4 @@
+import { IUnidade } from './../../interfaces/IUnidade';
 import { IProblema } from './../../interfaces/IProblema';
 import { IUsuario } from './../../interfaces/IUsuario';
 import { HttpClient } from '@angular/common/http';
@@ -34,11 +35,11 @@ export class ProblemaProvider {
   }
 
   getMoradorProblema(problema:IProblema) {
-    return this.http.get<IUsuario>(this.url +'moradorProblema/?id='+problema.id, {"headers": {"authorization": "Bearer "+localStorage.getItem("token"), "accept":"application/json"}});
+    return this.http.post<IUsuario>(this.url +'moradorProblema', problema, {"headers": {"authorization": "Bearer "+localStorage.getItem("token"), "accept":"application/json"}});
   }
   
-  getProblemasCondominio() {
-    return this.http.get<IProblema[]>(this.url +'problemascondominio', {"headers": {"authorization": "Bearer "+localStorage.getItem("token"), "accept":"application/json"}});
+  getProblemasCondominio(unidade:IUnidade) {
+    return this.http.get<IProblema[]>(this.url +'problemascondominio/?condominio_id='+unidade.condominio_id, {"headers": {"authorization": "Bearer "+localStorage.getItem("token"), "accept":"application/json"}});
   }
 
   getFotosProblemas(problema:IProblema) {

@@ -4,7 +4,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { IUsuario } from './../../interfaces/IUsuario';
 import { UsuariosProvider } from './../../providers/usuarios/usuarios';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
 /**
  * Generated class for the CadastroPage page.
@@ -18,6 +18,7 @@ import { IonicPage, NavController, NavParams, ToastController, ActionSheetContro
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage extends UtilsComponent {
+  @ViewChild('senha') campoSenha ;
 
   usuario: IUsuario = {
     email: '',
@@ -36,6 +37,8 @@ export class CadastroPage extends UtilsComponent {
   msgEmail:boolean = false;
   msgPassword:boolean = false;
   msgPassConf:boolean = false;
+  msgPassMenor:boolean = false;
+  msgPassDiferente: boolean = false;;
 
   constructor(
     public navCtrl: NavController, 
@@ -70,11 +73,23 @@ export class CadastroPage extends UtilsComponent {
     } 
     else if (this.usuario.password_confirmation == '') {
       this.msgPassConf = true; 
-    } else {    
+    } 
+    else if (this.usuario.password != this.usuario.password_confirmation) {
+      this.msgPassDiferente = true; 
+    } 
+    else {    
     this.navCtrl.push(SelectCondominioPage, {pUsuario:this.usuario});
     }
   }
   
+  chkSenha() {
+    if (this.usuario.password.length < 6 ) {
+      this.msgPassMenor = true;
+      this.campoSenha.setFocus();
+    } else {
+      this.msgPassMenor = false;
+    }
+  }
   onActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Selecione a fonte da imagem',

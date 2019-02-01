@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Lista de Vagas</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+        <ion-label>Andar</ion-label>
+        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="newVaga.andar" (ionChange)="lstVagas(newVaga.andar)">
+            <ion-option *ngFor="let item of listaAndaresGaragem" value="{{item}}">{{item}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Vaga</ion-label>
+        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="newVaga.vaga">
+            <ion-option *ngFor="let item of listaVagas" value="{{item.vaga}}">{{item.vaga}}</ion-option>
+        </ion-select>
+    </ion-item>
+  </ion-list>
+  <button ion-button icon-start full (click)="addVaga()">
+      <ion-icon name="add-circle"></ion-icon>
+      Adicionar
+  </button>
+  <ion-list reorder="true" (ionItemReorder)="$event.applyTo(vagas)">
+        <ion-item *ngFor="let item of vagas; let i = index">
+            <b>#{{i+1}}:</b> {{item.andar}} - Vaga {{item.vaga}} 
+            <button ion-button icon-only clear (click)="delVaga(i)">
+                <ion-icon name="remove-circle" color="danger"></ion-icon>
+            </button>
+        </ion-item>
+  </ion-list>    
+  <button ion-button icon-start full (click)="clsVagas()">
+      <ion-icon name="undo"></ion-icon>
+      Limpar Lista
+  </button>
+  <button ion-button icon-start full (click)="addLista()">
+      <ion-icon name="cloud-upload"></ion-icon>
+      Salvar
+  </button>
+</ion-content>

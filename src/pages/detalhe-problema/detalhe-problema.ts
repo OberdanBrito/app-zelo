@@ -38,8 +38,11 @@ export class DetalheProblemaPage {
                       condominio_id:null, 
                       torre_id:null,
                       unidade:null,
+                      sexo:'',
+                      nascimento:null,
                       foto:''
                     };
+  bucket:string = localStorage.getItem("defaultBucket");
   habilitaAção:boolean = false;
   usuario:IUsuario = {id:null, email:''};
   iconStatus:string = '';
@@ -57,21 +60,26 @@ export class DetalheProblemaPage {
     console.log('ionViewDidLoad DetalheProblemaPage');
     this.provUsuario.getStorage("usuario").then(res => {
       this.usuario = res;
-    });
-    this.provProblema.getMoradorProblema(this.problema).subscribe(res => {
-      this.morador = res;
-      
-      if (this.morador.foto == null) {
-        this.morador.foto = 'fotoPerfil.png';
-      }
-    }, erro => {
-      console.log("Erro: " + erro.message);
-    });
 
-    this.provProblema.getFotosProblemas(this.problema).subscribe(res => {
-      this.problema.fotos = res;
-    }, erro => {
-      console.log("Erro: " + erro.message);
+      this.provProblema.getMoradorProblema(this.problema).subscribe(res => {
+        console.log("entrou");
+        this.morador = res;
+        console.log("this.morador.foto: "+this.morador.foto);
+
+        if (this.morador.foto == null) {
+          this.morador.foto = 'fotoPerfil.png';
+        }
+
+        this.provProblema.getFotosProblemas(this.problema).subscribe(res => {
+          this.problema.fotos = res;
+        }, erro => {
+          console.log("Erro1: " + erro.message);
+        });
+
+      }, erro => {
+        console.log("Erro2: " + erro.message);
+      });
+
     });
   }
 

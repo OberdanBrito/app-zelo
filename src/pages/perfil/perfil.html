@@ -15,7 +15,7 @@
 <ion-content padding>
   <ion-card>
     <ion-card-content>
-      <img [hidden]="usuario.foto" src="assets/imgs/fotoPerfil.png" style="display:block"/>
+      <img [hidden]="usuario.foto" src="{{caminho}}fotoPerfil.png" style="display:block"/>
       <img [hidden]="!usuario.foto" src="{{caminho}}{{usuario.foto}}"/>
       <button ion-button full (click)="onActionSheet()">Alterar imagem ...</button>
       <ion-item>

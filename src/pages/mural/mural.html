@@ -21,10 +21,13 @@
       <button ion-fab mini (click)="goToCriarProblema()"><ion-icon name="create"></ion-icon></button>
   </ion-fab>  
   <ion-list>
-    <ion-item class="prob-item" (click)="goToDetalheProblema(item)" *ngFor="let item of problemas">
+    <ion-item class="prob-item" *ngFor="let item of problemas" (click)="goToDetalheProblema(item)">
       <h2>{{item.titulo}}</h2>
       <p>{{item.data | date:'dd/MM/yyyy'}}</p>
       <ion-icon name="ios-arrow-dropright" item-end></ion-icon>      
     </ion-item>
   </ion-list>
+  <div *ngIf="problemas.length == 0" style="text-align: center;">
+    <img src="assets/imgs/semProblemas.png"/>
+  </div>
 </ion-content>

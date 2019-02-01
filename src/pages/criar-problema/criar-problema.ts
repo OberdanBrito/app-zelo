@@ -1,7 +1,7 @@
 import { ProblemaProvider } from './../../providers/problema/problema';
 import { IProblema } from './../../interfaces/IProblema';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
@@ -38,7 +38,8 @@ export class CriarProblemaPage {
               public actionSheetCtrl:ActionSheetController, 
               private photoViewer: PhotoViewer,
               public problemaProvider:ProblemaProvider,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              public loadingCtrl:LoadingController
             ) {
   }
 
@@ -62,18 +63,25 @@ export class CriarProblemaPage {
   }
 
   addProblema() {
-
+    let load = this.loadingCtrl.create({
+      content:'Aguarde...',
+      duration: 14000
+    });
+    load.present();
     if (this.fotos) {
       this.problema.fotos = this.fotos;
     }
     this.problemaProvider.addProblema(this.problema).subscribe(res => {
       
       console.log(res);
+      load.dismiss();
       this.presentToast("O seu problema foi registrado!");
       this.navCtrl.pop();
 
     }, erro => {
       console.log("Erro: " + erro.message);
+      load.dismiss();
+      this.presentToast("Erro no registro do problema!");
     });
 
   }

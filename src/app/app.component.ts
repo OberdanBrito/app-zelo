@@ -1,3 +1,4 @@
+import { SorteioPage } from './../pages/sorteio/sorteio';
 import { MuralPage } from './../pages/mural/mural';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { LoginPage } from './../pages/login/login';
@@ -25,14 +26,22 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Perfil', component: PerfilPage },
-      { title: 'Mural de Problemas', component: MuralPage },
-      { title: 'Meus Problemas', component: MeusProblemasPage },
-      { title: 'Criar Problema', component: CriarProblemaPage },      
+      // SOSORTEIO - Comentado para o app trabalhar só para sorteio
+      //{ title: 'Mural de Problemas', component: MuralPage },
+      //{ title: 'Meus Problemas', component: MeusProblemasPage },
+      //{ title: 'Criar Problema', component: CriarProblemaPage },      
+      { title: 'Sorteio de Vagas', component: SorteioPage },      
       { title: 'Sair', component: LoginPage }
     ];
+    // Caminho das APIs
+    //localStorage.setItem("defaultURL","http://192.168.0.7:8000/api/"); //DEV
+    //localStorage.setItem("defaultURL","http://192.168.43.246:8000/api/"); //DEV-CELULAR
+    localStorage.setItem("defaultURL","https://zelo.herokuapp.com/api/"); //PROD
 
-    localStorage.setItem("defaultURL","http://192.168.0.7:8000/api/");
-    //localStorage.setItem("defaultURL","https://zelo.herokuapp.com/api/");
+    // Caminho para imagens
+    //localStorage.setItem("defaultBucket","http://192.168.0.7:8000/storage/"); //DEV
+    localStorage.setItem("defaultBucket","http://s3.amazonaws.com/zelobucket/"); //PROD
+
   }
 
   initializeApp() {
@@ -47,7 +56,8 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    if (page.title == 'Sair' || page.title == 'Mural de Problemas') {
+    // if (page.title == 'Sair' || page.title == 'Mural de Problemas') { // SOSORTEIO - Comentado para o app trabalhar só para sorteio
+    if (page.title == 'Sair' || page.title == 'Sorteio de Vagas') {
       this.nav.setRoot(page.component);
     } else {
       this.nav.push(page.component);

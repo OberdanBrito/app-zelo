@@ -121,7 +121,7 @@ export class AcaoProblemaPage extends UtilsComponent {
       
       console.log("this.problema.user_id: "+this.problema.user_id);
 
-      if (this.usuario.id == this.problema.user_id) {
+      if (this.usuario.id == this.problema.user_id || perfil == 'adm') {
 
         if (this.problema.status == "aberto" && perfil == 'adm') {
           this.action = {

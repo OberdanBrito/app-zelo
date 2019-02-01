@@ -4,7 +4,7 @@ import { UtilsComponent } from './../../components/utils/utils';
 import { UsuariosProvider } from './../../providers/usuarios/usuarios';
 import { IUsuario } from './../../interfaces/IUsuario';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the PerfilPage page.
@@ -32,7 +32,7 @@ export class PerfilPage extends UtilsComponent{
   novaSenha = {newPassword:'', newPassword_confirmation:''};
   escondeSenha:Boolean = true;
   icoBotaoSenha:string = "arrow-dropdown";
-  caminho:string = "http://192.168.0.7:8000/storage/";
+  caminho:string = localStorage.getItem("defaultBucket");
 
   constructor(
     public navCtrl: NavController, 
@@ -41,7 +41,8 @@ export class PerfilPage extends UtilsComponent{
     public toastCtrl:ToastController,
     public camera: Camera, 
     public actionSheetCtrl: ActionSheetController, 
-    public photoViewer: PhotoViewer
+    public photoViewer: PhotoViewer,
+    public loadingCtrl:LoadingController
   ) {
     super(toastCtrl);
   }
@@ -54,16 +55,24 @@ export class PerfilPage extends UtilsComponent{
   }
 
   editUsuario() {
+    let load = this.loadingCtrl.create({
+      content:'Aguarde...',
+      duration: 14000
+    });
+    load.present();
     if (this.novaSenha.newPassword == this.novaSenha.newPassword_confirmation) {
       this.usuariosProvider.editUsuario(this.usuario,this.novaSenha).subscribe(res => {
         this.usuariosProvider.setStorage("usuario",res);
+        load.dismiss();
         this.presentToast("Usuário atualizado :)");
         this.navCtrl.pop();
       }, erro => {
+        load.dismiss();
         this.presentToast("Erro na atualização do usuário: "+ erro.message);
         console.log("Erro: " + erro.message);
       });
     } else {
+      load.dismiss();
       this.presentToast("O campo de Confirmação é diferente da Nova Senha");
     }
   }

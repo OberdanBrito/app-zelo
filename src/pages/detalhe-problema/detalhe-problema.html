@@ -21,7 +21,7 @@
   <ion-card>      
       <ion-item>
         <ion-avatar item-start>
-          <img src="http://192.168.0.7:8000/storage/{{morador.foto}}">
+          <img src="{{bucket}}{{morador.foto}}">
         </ion-avatar>
         <h2>{{problema.titulo}}</h2>
         <p>Status: {{problema.status | titlecase}}</p>
@@ -31,7 +31,7 @@
     
       <ion-slides>
           <ion-slide *ngFor = "let foto of problema.fotos">
-            <h1><img src="http://192.168.0.7:8000/storage/{{foto}}"></h1>
+            <h1><img src="{{bucket}}{{foto}}"></h1>
           </ion-slide>
       </ion-slides>
     

@@ -2,6 +2,7 @@ import { IUsuario } from '../../interfaces/IUsuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { IUnidade } from '../../interfaces/IUnidade';
 
 /*
   Generated class for the UsuariosProvider provider.
@@ -61,6 +62,11 @@ export class UsuariosProvider {
   getPerfil(){
     this.token = localStorage.getItem("token");
     return this.http.get<any>(this.url +'perfil',{"headers": {"authorization": "Bearer "+this.token}});
+  }
+
+  getUnidadesUsuario(){
+    this.token = localStorage.getItem("token");
+    return this.http.get<IUnidade[]>(this.url +'unidadesUsuario',{"headers": {"authorization": "Bearer "+this.token}});
   }
 
 }

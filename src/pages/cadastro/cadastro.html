@@ -19,8 +19,9 @@
             <img [hidden]="usuario.foto" src="assets/imgs/fotoPerfil.png" style="display:block"/>
             <img [hidden]="!usuario.foto" src="{{usuario.foto}}"/>
             <button ion-button full (click)="onActionSheet()">Adicione uma imagem ...</button>
+            <p>* Campos obrigatórios</p>
             <ion-item>
-              <ion-input type="text" placeholder="Nome" required [(ngModel)]="usuario.name"></ion-input>
+              <ion-input type="text" placeholder="*Nome" required [(ngModel)]="usuario.name"></ion-input>
             </ion-item>
             <span class="alert" *ngIf="msgName">*Nome é obrigatório</span>
             <ion-list>
@@ -37,17 +38,20 @@
               <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="usuario.nascimento"></ion-datetime>
             </ion-item>
             <ion-item>
-              <ion-input type="email" placeholder="E-mail" [(ngModel)]="usuario.email"></ion-input>
+              <ion-input type="email" placeholder="*E-mail" [(ngModel)]="usuario.email"></ion-input>
             </ion-item>
             <span class="alert" *ngIf="msgEmail">*Email é obrigatório</span>
             <ion-item>
-              <ion-input type="password" placeholder="Senha" [(ngModel)]="usuario.password"></ion-input>
+              <ion-input #senha type="password" placeholder="*Senha" [(ngModel)]="usuario.password" (ionBlur)="chkSenha()"></ion-input>
             </ion-item>
+            <p style="color: #aaa; font-size: smaller;" *ngIf="!msgPassMenor && usuario.password == ''">A senha deve conter mais de 6 dígitos</p>
             <span class="alert" *ngIf="msgPassword">*Senha é obrigatório</span>
+            <span class="alert" *ngIf="msgPassMenor">*A senha deve conter mais de 6 dígitos</span>
             <ion-item>
-              <ion-input type="password" placeholder="Confirme a Senha" [(ngModel)]="usuario.password_confirmation"></ion-input>
+              <ion-input type="password" placeholder="*Confirme a Senha" [(ngModel)]="usuario.password_confirmation"></ion-input>
             </ion-item>
             <span class="alert" *ngIf="msgPassConf">*Confirmação da senha é obrigatório</span>
+            <span class="alert" *ngIf="msgPassDiferente">*A senha não bate com a confirmação</span>
         </ion-card-content>
     </ion-card>
     <p>

@@ -1,0 +1,24 @@
+<!--
+  Generated template for the OutrasListasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Todas as Listas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item class="prob-item" *ngFor="let item of unidades" (click)="goToDetalheLista(item)">
+      <h2>Unidade {{item.unidade}}</h2>
+      <p>Torre {{item.torre}}</p>
+      <ion-icon name="ios-arrow-dropright" item-end></ion-icon>      
+    </ion-item>
+  </ion-list>
+</ion-content>
